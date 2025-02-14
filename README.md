@@ -22,29 +22,46 @@
  common issue i faced  while running Docker commands. If you see something like:
 
 
-Got permission denied while trying to connect to the Docker daemon socket.
+    Got permission denied while trying to connect to the Docker daemon socket.
 
   
 To check whether Docker is running on your system
 
-sudo systemctl status docker
+    sudo systemctl status docker
 
 
- add your user to the Docker group
+add your user to the Docker group
 
-
-sudo usermod -aG docker $USER  
+    sudo usermod -aG docker $USER  
 
   (Logout and log back in for changes to take effect.)
   
-docker run hello-world
 
 🔹 Writing a Dockerfile & Creating an Image
 
-FROM ubuntu:latest  
-WORKDIR /app  
-COPY . /app  
-RUN apt-get update && apt-get install -y python3 python3-pip  
-CMD ["python3", "app.py"]  
+    FROM ubuntu:latest  
+    WORKDIR /app
+    COPY . /app 
+    RUN apt-get update && apt-get install -y python3 python3-pip  
+    CMD ["python3", "app.py"] 
+    
+To build and tag the image:
+
+    docker build -t username/my-first-docker-image:latest
+
+To verify:
+
+    docker images  
+
+🔹 Running & Pushing to Docker Hub
+
+    docker run -it username/my-first-docker-image
+    Hello world
+
+ After testing my container, I pushed it to Docker Hub
+
+    docker login  
+    docker push my-dockerhub-username/my-first-docker-image:latest
+
 
 
